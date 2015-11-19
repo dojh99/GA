@@ -71,5 +71,4 @@ public class Population<T extends GeneTemplate> extends ArrayList<T>{
 		return str;
 	}
 	
-	
 }

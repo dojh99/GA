@@ -22,7 +22,7 @@ public class Gene extends GeneTemplate<Integer>{
 
 		if (mutated){
 			int point = rand.nextInt(maxSize);
-			int mutatednum = (int) rand.nextInt(maxValue-minValue+1)+minValue;
+			int mutatednum = rand.nextInt(maxValue-minValue+1)+minValue;
 			this.set(point,mutatednum);
 			//this.add(point,mutatednum);
 		}
@@ -108,9 +108,9 @@ public class Gene extends GeneTemplate<Integer>{
 	}
 
 	public void init(int mxSize,int mxValue,int mnValue){
-		this.maxSize = mxSize;
-		this.maxValue = mxValue;
-		this. minValue = mnValue;
+		Gene.maxSize = mxSize;
+		Gene.maxValue = mxValue;
+		Gene. minValue = mnValue;
 		//this.mod_strict = mod_strict;
 	}
 
@@ -129,9 +129,5 @@ public class Gene extends GeneTemplate<Integer>{
 		return "Fitness : " + fitness +" Values : "+ super.toString() + "  lenth : "+this.size() +" CPOINT :" + crossPoint.toString();
 	
 	}
-	
-	
-
-
 
 }

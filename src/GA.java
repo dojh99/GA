@@ -38,14 +38,13 @@ public class GA
 		populationInit();
 		population.scoreAllEntities();
 		population.sortEntities();
-		populationT=population;
 		isBest(population.get(0));
 		listener.AGenerationEnded(generation,population.getFitnessAvr(),population.getBestFitness());
 		//System.out.println("Generation : " + generation);
 		//System.out.println("Population Data : " + population.toString());
 		generation++;
 		
-		while(endConditionMeets()){
+		while(!endConditionMeets()){
 			aGenerationWork();
 		}
 		
@@ -58,12 +57,9 @@ public class GA
 		population.scoreAllEntities();
 		population.sortEntities();
 		isBest(population.get(0));
-		endConditionAsZCH();
-		populationT=population;
-		
 		listener.AGenerationEnded(generation,population.getFitnessAvr(),population.getBestFitness());
-		//System.out.println("Generation : " + generation);
-		//System.out.println("Population Data : " + population.toString());
+		System.out.println("Generation : " + generation);
+		System.out.println("Population Data : " + population.toString());
 		generation++;
 		}
 	
@@ -117,7 +113,7 @@ public class GA
 			return true;
 		}
 		
-		return true;
+		return false;
 	}
 	
 	private boolean endConditionMeetsAsGen(){

@@ -24,24 +24,31 @@ public class Main
 				result.add(result_Temp);
 				result_Temp.print();
 			}
-
-
 		};
+				
+		int i;
+		for( i=0;i<10;i++)
+		R_SN_PN(500,5);
 		
+		printAllResults();
 		
-		//TEST_A();
-		R_SN_PN(1000,10);
-		
-		
+	}
+	
+
+	
+	final static private void R_SN_PN(int population,int numOfSurvival){
+		GA genetocAl = new GA(numOfSurvival,population,0);
+		genetocAl.setListener(lis);
+		genetocAl.work();
 	}
 	
 	final static private void TEST_A(){
 		/* Relationship between mutate probability and generation
-		 * from 10 power -11 to 10 power 100 percent (×10)
+		 * from 10 power -11 to 10 power 100 percent (횞10)
 		 * and from 10 power -3 to 100 (25*n)
 		 */
 		  double mutateProbab =0;
-		  int power = 0;
+		  int power = 2;
 		  
 		  for(power=0;power<3;power++){
 			  mutateProbab= Math.pow(10,power);
@@ -51,13 +58,6 @@ public class Main
 		  }
 		 
 		 
-	}
-	
-	final static private void R_SN_PN(int population,int numOfSurvival){
-		// 생좀객체의 수와 전체 갹체의 수의 비율의 관계
-		GA genetocAl = new GA(numOfSurvival,population,0);
-		genetocAl.setListener(lis);
-		genetocAl.work();
 	}
 	
 	final static private void Temp(){
@@ -82,6 +82,19 @@ public class Main
 		}
 
 		System.out.println( avr/result.size());
+	}
+	
+	static private void printAllResults(){
+		int i=0;
+		int size = result.size();
+		double avr =0;
+		
+		while(i<size){
+			avr+=result.get(i).getGeneration();
+			System.out.println(i+"  :  " + result.get(i).getGeneration());
+			i++;
+		}
+		System.out.println("avr :" +avr/size);
 	}
 	
 }
