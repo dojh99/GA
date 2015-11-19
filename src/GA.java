@@ -7,13 +7,15 @@ public class GA
 	Gene bestData;
 	int generation;
 	int n_survival;
-	int n_population; 
+	int n_population;
+	
+	Population<Gene> populationT;
 	
 	double mutateProbab;
 	
 	GAListener listener;
 	
-	int endCondition=50;
+	int endCondition=100;
 	
 	public GA(int n_survival,int n_population, double mutateProbab){
 		init(new Population<Gene>(),n_survival,n_population,mutateProbab);
@@ -32,29 +34,33 @@ public class GA
 		this.mutateProbab=mutateProbab;
 	}
 	
-	public Result work(){
+	public void work(){
 		populationInit();
 		population.scoreAllEntities();
 		population.sortEntities();
+		populationT=population;
 		isBest(population.get(0));
 		listener.AGenerationEnded(generation,population.getFitnessAvr(),population.getBestFitness());
 		//System.out.println("Generation : " + generation);
 		//System.out.println("Population Data : " + population.toString());
 		generation++;
 		
-		while(!endConditionMeets()){
+		while(endConditionMeets()){
 			aGenerationWork();
 		}
 		
-		//printFinalResult();
-		return new Result(bestData.fitness,generation-1,bestData);
-	}
+		listener.finished(new Result(bestData.fitness,generation,bestData));
+		
+		}
 	
 	public void aGenerationWork(){
 		makeNextGen();
 		population.scoreAllEntities();
 		population.sortEntities();
 		isBest(population.get(0));
+		endConditionAsZCH();
+		populationT=population;
+		
 		listener.AGenerationEnded(generation,population.getFitnessAvr(),population.getBestFitness());
 		//System.out.println("Generation : " + generation);
 		//System.out.println("Population Data : " + population.toString());
@@ -110,11 +116,19 @@ public class GA
 		if(bestData.fitness>=endCondition){
 			return true;
 		}
-		return false;
+		
+		return true;
 	}
 	
 	private boolean endConditionMeetsAsGen(){
 		if(generation>=endCondition){
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean endConditionAsZCH(){
+		if(population.equals(populationT)){
 			return true;
 		}
 		return false;

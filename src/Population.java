@@ -70,4 +70,6 @@ public class Population<T extends GeneTemplate> extends ArrayList<T>{
 		str += "\n";
 		return str;
 	}
+	
+	
 }

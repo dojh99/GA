@@ -13,45 +13,26 @@ public class Main
 			@Override
 			public void AGenerationEnded(int generation,double average,double bestFitness){
 				// TODO: Implement this method
-				/*System.out.println("Gen : "+generation);
-				 System.out.println("Avr : "+average);
-
-				 System.out.println("Best : "+bestFitness);*/
+				System.out.println("Gen : "+generation);
+				System.out.println("Avr : "+average);
+				System.out.println("Best : "+bestFitness);
 			}
 
 			@Override
-			public void finished(Result result){
+			public void finished(Result result_Temp){
 				// TODO: Implement this method
+				result.add(result_Temp);
+				result_Temp.print();
 			}
 
 
 		};
 		
-		double mutateProbab= Math.pow(10,2);
-		System.out.println(mutateProbab);
 		
-		int i =0;
-		
-		while(i<50){
-		GA ga = new GA(10,1000,mutateProbab);
-		Result resultTemp;
-		ga.setListener(lis);
-		resultTemp=ga.work();
-		resultTemp.print();
-		result.add(resultTemp);
-		i++;
-		}
 		//TEST_A();
+		R_SN_PN(1000,10);
 		
-		float avr =0;
-		int k=0;
-
-		while(k<result.size()){
-			avr+=result.get(k).getGeneration();
-			k++;
-		}
-
-		System.out.println( avr/result.size());
+		
 	}
 	
 	final static private void TEST_A(){
@@ -62,13 +43,45 @@ public class Main
 		  double mutateProbab =0;
 		  int power = 0;
 		  
-		  for(power=-3;power<=2;power++){
+		  for(power=0;power<3;power++){
 			  mutateProbab= Math.pow(10,power);
-			  GA ga = new GA(10,1000,mutateProbab*10);
-			  ga.work().print();
+			  GA ga = new GA(10,1000,mutateProbab);
+			  ga.setListener(lis);
+			  ga.work();
 		  }
 		 
 		 
+	}
+	
+	final static private void R_SN_PN(int population,int numOfSurvival){
+		// 생좀객체의 수와 전체 갹체의 수의 비율의 관계
+		GA genetocAl = new GA(numOfSurvival,population,0);
+		genetocAl.setListener(lis);
+		genetocAl.work();
+	}
+	
+	final static private void Temp(){
+		double mutateProbab= Math.pow(10,2);
+		System.out.println(mutateProbab);
+
+		int i =0;
+
+		while(i<50){
+			GA ga = new GA(100,1000,mutateProbab);
+			ga.setListener(lis);
+			ga.work();
+			i++;
+			}
+			
+		float avr =0;
+		int k=0;
+
+		while(k<result.size()){
+			avr+=result.get(k).getGeneration();
+			k++;
+		}
+
+		System.out.println( avr/result.size());
 	}
 	
 }

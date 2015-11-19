@@ -2,8 +2,8 @@
 import java.util.*;
 
 public class Gene extends GeneTemplate<Integer>{
-	static private int maxSize =50;
-	static private int maxValue =50;
+	static private int maxSize =100;
+	static private int maxValue =100;
 	static private int minValue =0;
 
 	static public Random rand= new Random();
