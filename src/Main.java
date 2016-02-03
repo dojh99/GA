@@ -3,17 +3,21 @@ import java.util.ArrayList;
 public class Main {
     static ArrayList<Result> result;
     static GAListener lis;
+    static int[] probabilities ={50,100,200,300,400,500,600,700,800};
 
     public static void main(String[] args) {
         result = new ArrayList<Result>();
         lis = new GAListener() {
 
             @Override
-            public void AGenerationEnded(int generation, double average, double bestFitness) {
+            public void AGenerationEnded(int generation,Population population, double average, double bestFitness) {
                 // TODO: Implement this method
+
+              /* Removed useless outputs
+
                 System.out.println("Gen : " + generation);
                 System.out.println("Avr : " + average);
-                System.out.println("Best : " + bestFitness);
+                System.out.println("Best : " + bestFitness);*/
             }
 
             @Override
@@ -24,22 +28,26 @@ public class Main {
             }
         };
 
-        int i;
-        for (i = 0; i < 10; i++)
-            R_SN_PN(500, 5);
+        for(int prob:probabilities){
+            /* Do this for 10 times */
 
-        printAllResults();
+            for (int i = 0; i < 10; i++)
+                R_SN_PN(prob, 5);
+            printAllResults();
+            result.clear();
+        }
 
     }
 
 
-    final static private void R_SN_PN(int population, int numOfSurvival) {
+    private static void R_SN_PN(int population, int numOfSurvival) {
         GA genetocAl = new GA(numOfSurvival, population, 100);
         genetocAl.setListener(lis);
         genetocAl.work();
     }
 
-    final static private void TEST_A() {
+     private static void TEST_A() {
+
         /* Relationship between mutate probability and generation
 		 * from 10 power -11 to 10 power 100 percent (횞10)
 		 * and from 10 power -3 to 100 (25*n)
@@ -57,7 +65,7 @@ public class Main {
 
     }
 
-    final static private void Temp() {
+     private static void Temp() {
         double mutateProbab = Math.pow(10, 2);
         System.out.println(mutateProbab);
 
@@ -81,7 +89,7 @@ public class Main {
         System.out.println(avr / result.size());
     }
 
-    static private void printAllResults() {
+    private static void printAllResults() {
         int i = 0;
         int size = result.size();
         double avr = 0;
