@@ -1,0 +1,6 @@
+{
+  "name": "SchoolWork_GA",
+  "tagline": "Playing with Genetic Algorithm",
+  "body": "###SchoolWork_GA에 대하여\r\nSchoolWork_GA 는 유전적 알고리즘에서 적합도가 높은 개체들을 선별할때 선발되는 개체의 수와 이 알고리즘에서 해(혹은 그와 가까운개체)를 도출해 내는 세대의 대략적인 관계를 파악하기 위해 만들어 졌습니다.\r\n\r\n### 만든이\r\n진로소논문대회에 나가기위해 이 코드를 짠 2015년의 서울 대진고등학교의 한 1학년 학생.\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
