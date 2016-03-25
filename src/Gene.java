@@ -13,8 +13,6 @@ public class Gene extends GeneTemplate<Integer> {
 
     ArrayList<Integer> crossPoint = new ArrayList<Integer>();
 
-    // boolean mod_strict = false;
-
 
     @Override
     public boolean mutate(double permil) {
@@ -25,7 +23,6 @@ public class Gene extends GeneTemplate<Integer> {
             int point = rand.nextInt(maxSize);
             int mutatednum = rand.nextInt(maxValue - minValue + 1) + minValue;
             this.set(point, mutatednum);
-            //this.add(point,mutatednum);
         }
 
         return mutated;
@@ -33,22 +30,21 @@ public class Gene extends GeneTemplate<Integer> {
 
     @Override
     public GeneTemplate<Integer> crossOver(GeneTemplate<Integer> others) {
-        //Random rand= new Random();
         Gene crossed = new Gene();
         ArrayList<Integer> pointTemp = new ArrayList<Integer>(n_pointCross);
 
-        int i = 0;
+        int i;
 
         for (i = 0; i < n_pointCross; i++) {
-            Integer point = new Integer(rand.nextInt(maxSize - 1) + 1);
+            Integer point = rand.nextInt(maxSize - 1) + 1;
 
             while (pointTemp.contains(point)) {
-                point = new Integer(rand.nextInt(maxSize - 1) + 1);
+                point = rand.nextInt(maxSize - 1) + 1;
             }
             pointTemp.add(point);
         }
         Collections.sort(pointTemp);
-        //System.out.println(pointTemp.toString());
+
 
         boolean toggle = true;
         int k = 0;
@@ -77,7 +73,6 @@ public class Gene extends GeneTemplate<Integer> {
     @Override
     public void scoring() {
         scoring_test1();
-
     }
 
     @Override
@@ -101,17 +96,6 @@ public class Gene extends GeneTemplate<Integer> {
         }
         this.fitness = score;
 
-    }
-
-    private void scoring_test2() {
-
-    }
-
-    public void init(int mxSize, int mxValue, int mnValue) {
-        Gene.maxSize = mxSize;
-        Gene.maxValue = mxValue;
-        Gene.minValue = mnValue;
-        //this.mod_strict = mod_strict;
     }
 
     @Override

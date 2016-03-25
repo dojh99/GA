@@ -16,16 +16,16 @@ public class GA {
 
     int endCondition = 100;
 
-    public GA(int n_survival, int n_population, double mutateProbab) {
+    public GA(int n_population,int n_survival, double mutateProbab) {
         init(new Population<Gene>(), n_survival, n_population, mutateProbab);
     }
 
-    public GA(Population<Gene> population, int n_survival, int n_population, double mutateProbab) {
+    public GA(Population<Gene> population, int n_population,int n_survival, double mutateProbab) {
         init(population, n_survival, n_population, mutateProbab);
     }
 
 
-    public void init(Population<Gene> population, int n_survival, int n_population, double mutateProbab) {
+    public void init(Population<Gene> population, int n_population,int n_survival, double mutateProbab) {
         this.population = population;
         this.n_survival = n_survival;
         this.n_population = n_population;
@@ -38,8 +38,6 @@ public class GA {
         population.sortEntities();
         isBest(population.get(0));
         listener.AGenerationEnded(generation,population, population.getFitnessAvr(), population.getBestFitness());
-        //System.out.println("Generation : " + generation);
-        //System.out.println("Population Data : " + population.toString());
         generation++;
 
         while (!endConditionMeets()) {
@@ -105,25 +103,15 @@ public class GA {
     }
 
     private boolean endConditionMeets() {
-        if (bestData.fitness >= endCondition) {
-            return true;
-        }
-
-        return false;
+        return (bestData.fitness >= endCondition);
     }
 
     private boolean endConditionMeetsAsGen() {
-        if (generation >= endCondition) {
-            return false;
-        }
-        return true;
+        return (generation >= endCondition);
     }
 
     private boolean endConditionAsZCH() {
-        if (population.equals(populationT)) {
-            return true;
-        }
-        return false;
+        return (population.equals(populationT));
     }
 
     private void printFinalResult() {
